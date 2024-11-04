@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule , ConfigService } from '@nestjs/config';
 import { ProductModule } from './product/product.module';
+import { Product } from './product/product.entity';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { ProductModule } from './product/product.module';
       useFactory: async (configService) => ({
         type: 'mysql',
         host: configService.get('DB_HOST'),
-        port: parseInt(configService.get('DB_PORT'), 10),
+        port: +configService.get('DB_PORT'),
         username: configService.get('DB_USER'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),

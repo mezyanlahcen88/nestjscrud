@@ -15,7 +15,7 @@ export class ProductService {
   }
 
   async findOne(id: number): Promise<Product> {
-    return this.productRepository.findOne(id);
+    return this.productRepository.findOneBy({ id });
   }
 
   async create(product: Product): Promise<Product> {
@@ -30,3 +30,8 @@ export class ProductService {
     await this.productRepository.delete(id);
   }
 }
+
+
+
+
+
